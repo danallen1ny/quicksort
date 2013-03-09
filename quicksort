@@ -1,0 +1,134 @@
+public class QuickSort {
+
+    public static void main(String[] args) {
+ int length=5,min=0,max=9;
+ Comparable[] a = createArray(min,max,length);
+ printArray(a); 
+ quickSort(a,0,length-1);
+ printArray(a);
+    }
+    
+    public static void printArray(Comparable[] a) {
+        for (int i = 0; i < a.length; i++) {
+            System.out.print(a[i]+" ");
+        }
+        System.out.println();
+    }
+    
+    public static Comparable[] createArray(int min, int max, int length) {
+        Comparable[] a = new Comparable[length];
+        for (int i = 0; i < a.length; i++)
+            a[i] = MyMath.randInteger(min,max);
+ return a;
+    }
+    
+    
+    
+tatic void insertionSort(int[] A)
+{
+              
+           int itemsSorted;  // number of items that have been sorted so far
+           for (itemsSorted = 1; itemsSorted < A.length; itemsSorted++) {
+                 // assume that items A[0], A[1], ... A[itemsSorted-1] have
+                 // already been sorted, and insert A[itemsSorted] into the list.
+              int temp = A[itemsSorted];  // the item to be inserted
+              int loc = itemsSorted - 1;
+              while (loc >= 0 && A[loc] > temp) {
+                 A[loc + 1] = A[loc];
+                 loc = loc - 1;
+              }
+              A[loc + 1] = temp;
+           }
+        }
+    
+    
+    public static void nQuicksort(int[] myArray, int n) 
+    { 
+      if(n > myArray.length)
+      {insertionSort(myArray);}
+    
+       int[] pivs = new int[n];
+       for (int i = 0; i < pivs.length; i++)
+       {pivs[i] = myArray[i];}
+    
+       insertionSort(pivs);
+    
+       int width = ((myArray.length / n) - 1);
+       
+       int[] partitions = new int[2 * n];
+       partitions[0] = myArray[0]
+       
+       for (int i = 1; i < partitions.length - 1; i = i + 2)
+       {
+          int m = (i*width-1)
+          partitions[i] = myArray[m];
+          partitions[i+1] = myArray[(m) + 1];
+       }
+    
+       partitions[partitions.length - 1] = myArray[myArray.length - 1]
+    
+       
+    }
+    
+    
+    
+    
+    public static int partition(Comparable[] x, int low, int high, Comparable pivot) {
+ 
+ int i = low;
+ int j = high;
+ 
+ boolean flag = true;
+ while (flag) {
+     
+     // advance left index to the right:
+     while ( (i < x.length) && (x[i].compareTo(pivot) < 0) ) 
+  i++; 
+     
+     // advance right index to the left:
+     while ( (j >= 0) && (pivot.compareTo(x[j]) < 0) ) 
+  j--; 
+     
+     //swap:
+     if (i < j) { 
+  Comparable temp = x[i];
+  x[i] = x[j];
+  x[j] = temp;
+  i++;
+  j--;
+     } 
+
+     // indicies have "met" (i==j), so partitioning:
+     else 
+  flag=false;
+ }
+ return i;
+    }
+    
+    // sort x[a..b]
+    public static void quickSort(Comparable[] x, int a, int b) {
+ if (a < b) {
+     // pick "random" pivot and partition x:
+     int p = partition(x,a+1,b,x[a]); 
+
+     // move pivot into its final resting place
+     // swap x[p-1] and x[a]:
+     Comparable temp = x[p-1]; // indicies: a..p-1,p,p+1..b
+     x[p-1] = x[a];
+     x[a] = temp;
+
+     // sort left and right partitions:
+     // indicies: a..p-1,p,p+1..b
+     quickSort(x,a,p-1);
+     quickSort(x,p,b);
+ }
+    }
+}
+
+class MyMath {
+    // Return a random int between low and high, inclusive:
+    public static int randInt(int low, int high) {
+        return (int) (Math.random()*(high-low+1)) + (int) low; }
+    public static Integer randInteger(int low, int high) {
+        return new Integer(randInt(low,high)); }
+}
